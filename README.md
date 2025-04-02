@@ -70,6 +70,41 @@ terraform-project/
 │   │   ├── outputs.tf
 ```
 
+
+## 🚀 Publicação do Módulo no Terraform Registry
+Se desejar disponibilizar este módulo no [Terraform Registry](https://registry.terraform.io/), siga os passos abaixo:
+
+### 1️⃣ Criar um repositório no GitHub
+- O nome do repositório deve seguir o padrão `terraform-<PROVIDER>-<NOME_DO_MODULO>`
+- Exemplo: `terraform-digitalocean-wp-stack`
+
+### 2️⃣ Estruturar os arquivos do módulo
+- O módulo deve conter um `main.tf`, `variables.tf`, `outputs.tf` e um `README.md`
+
+### 3️⃣ Criar uma versão do módulo
+- Utilize **tags** no GitHub para definir versões do módulo, por exemplo:
+```sh
+git tag v1.0.0
+```
+- Suba a tag para o repositório remoto:
+```sh
+git push origin v1.0.0
+```
+
+### 4️⃣ Publicar no Terraform Registry
+- O módulo será automaticamente detectado se estiver no formato correto e público.
+- Confirme a publicação no [Terraform Registry](https://registry.terraform.io/)
+
+### 5️⃣ Utilizar o módulo publicado
+Uma vez publicado, o módulo pode ser utilizado em qualquer projeto Terraform:
+```hcl
+module "wp_stack" {
+  source      = "github.com/seu-usuario/terraform-digitalocean-wp-stack"
+  wp_vm_count = var.wp_vm_count
+  region      = var.region
+  vms_ssh     = var.vms_ssh
+}
+```
 ## 🚀 Destruir a Infraestrutura
 Se precisar remover todos os recursos criados, execute:
 ```sh
